@@ -7,7 +7,7 @@ function playGame() {
     if (choices[userSelection] == choices.at(cpuSelection - 1)) {
         console.log(`You lose! Computer chose ${choices[cpuSelection]}. You chose ${choices[userSelection]}. ${choices[cpuSelection]} beats ${choices[userSelection]}.`);
         playAgain();
-    } else if (choices[cpuSelection] == choices.at(cpuSelection - 1)) {
+    } else if (choices[cpuSelection] == choices.at(userSelection - 1)) {
         console.log(`You win! You chose ${choices[userSelection]}. Computer chose ${choices[cpuSelection]}. ${choices[userSelection]} beats ${choices[cpuSelection]}.`);
         playAgain();
     } else {
