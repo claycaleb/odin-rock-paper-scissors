@@ -56,6 +56,8 @@ function playAgain() {
         computerScore = 0;
         humanScore = 0;
         playRound();
+    } else if (confirm(text) === null) {
+        return;
     }
 }
 
