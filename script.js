@@ -2,6 +2,8 @@ const choices = ["Rock", "Paper", "Scissors"];
 let computerScore = 0;
 let humanScore = 0;
 
+playRound();
+
 function checkWin() {
     if (humanScore == 3) {
         alert("You won!");
@@ -60,5 +62,3 @@ function playAgain() {
         return;
     }
 }
-
-playRound();
