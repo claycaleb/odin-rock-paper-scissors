@@ -1,5 +1,11 @@
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random()*3);
+
+    switch (computerChoice) {
+        case 0: return "rock";
+        case 1: return "paper";
+        case 2: return "scissors";
+    }
     if (computerChoice == 0) {
         return "rock";
     } else if (computerChoice == 1) {
@@ -10,7 +16,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let humanChoice = prompt('Shoot! Type "rock", "paper", or "scissors" and click OK to play.');
+    let humanChoice = prompt('Shoot! Type "rock", "paper", or "scissors" and click OK.');
 
     try {
         humanChoice = humanChoice.toLowerCase();
