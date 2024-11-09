@@ -19,6 +19,8 @@ function checkWin() {
 function checkIfInvalidInput(input) {
     if (input >= 1 && input <= 3) {
         return input;
+    } else if (input === null) {
+        console.log("Prompt canceled.")
     } else {
         input = prompt("Invalid input. Try again. Select your weapon: Rock (1), Paper (2), or Scissors (3)");
         return checkIfInvalidInput(input);
@@ -30,6 +32,10 @@ function playRound() {
 
     input = checkIfInvalidInput(input);
     
+    if (typeof input === 'undefined') {
+        return;
+    }
+
     let humanSelection = +input - 1;
     let computerSelection = Math.floor(Math.random()*3);
 
@@ -54,11 +60,11 @@ function playRound() {
 
 function playAgain() {
     text = "Press OK to play again."
-    if (confirm(text) == true) {
+    if (confirm(text) === false) {
+        return;
+    } else {
         computerScore = 0;
         humanScore = 0;
-        playRound();
-    } else if (confirm(text) === null) {
-        return;
+        return playRound();
     }
 }
