@@ -43,7 +43,9 @@ function updateComputerChoice() {
 };
 
 function playRound() {
+    
     updateComputerChoice();
+
     if ((computerPlayer.index + 1) % 5 === humanPlayer.index) {
         humanPlayer.winDescription = game.descriptions[humanPlayer.index][0];
         humanPlayer.winsRound();
@@ -76,8 +78,6 @@ selectionButtons.forEach(button => {
     button.addEventListener("click", () => {
         humanPlayer.gesture = button.id;
         humanPlayer.index = game.gestures.indexOf(button.id);
-        console.log(`${humanPlayer.index}, ${humanPlayer.gesture}`);
         playRound();
-
    });
 });
