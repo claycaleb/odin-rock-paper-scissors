@@ -1,5 +1,12 @@
 const game = {
     gestures: ["rock", "paper", "scissors", "Spock", "lizard"],
+    descriptions: [
+        ["Rock crushes Lizard.", "Rock crushes Scissors."],
+        ["Paper covers Rock.", "Paper disproves Spock."],
+        ["Scissors cuts Paper.", "Scissors decapitates Lizard."],
+        ["Spock smashes Scissors.", "Spock vaporizes Rock."],
+        ["Lizard poisons Spock.", "Lizard eats Paper."]
+    ],
     winner: null,
     rounds: 5
 };
@@ -11,7 +18,12 @@ const humanPlayer = {
     score: 0,
     winsRound() {
         this.score++;
-        console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. You win the round!`);
+        if ((computerPlayer.index + 1) % 5 === this.index) {
+            winDescription = game.descriptions[this.index][0];
+        } else if ((this.index + 2) % 5 === computerPlayer.index) {
+            winDescription = game.descriptions[this.index][1];
+        }
+        console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. ${winDescription} You win the round!`);
         console.log(`Your score: ${this.score} | Computer score: ${computerPlayer.score}`);
     }
 };
@@ -65,7 +77,6 @@ selectionButtons.forEach(button => {
     button.addEventListener("click", () => {
         humanPlayer.gesture = button.id;
         humanPlayer.index = game.gestures.indexOf(button.id);
-        console.log(button.id);
         playRound();
    });
 });
