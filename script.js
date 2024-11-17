@@ -1,5 +1,5 @@
 const game = {
-    gestures: ["rock", "paper", "scissors", "Spock", "lizard"],
+    gestures: ["Rock", "Paper", "Scissors", "Spock", "Lizard"],
     descriptions: [
         ["Rock crushes Lizard.", "Rock crushes Scissors."],
         ["Paper covers Rock.", "Paper disproves Spock."],
@@ -16,14 +16,10 @@ const humanPlayer = {
     gesture: "",
     isWinner: false,
     score: 0,
+    winDescription: "",
     winsRound() {
         this.score++;
-        if ((computerPlayer.index + 1) % 5 === this.index) {
-            winDescription = game.descriptions[this.index][0];
-        } else if ((this.index + 2) % 5 === computerPlayer.index) {
-            winDescription = game.descriptions[this.index][1];
-        }
-        console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. ${winDescription} You win the round!`);
+        console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. ${this.winDescription} You win the round!`);
         console.log(`Your score: ${this.score} | Computer score: ${computerPlayer.score}`);
     }
 };
@@ -33,10 +29,11 @@ const computerPlayer = {
     gesture: "",
     isWinner: false,
     score: 0,
+    winDescription: "",
     winsRound() {
         this.score++;
-        console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. You lose the round!`);
-        console.log(`Your score: ${this.score} | Computer score: ${computerPlayer.score}`);
+        console.log(`You picked ${humanPlayer.gesture}. Computer picked ${this.gesture}. ${this.winDescription} You lose the round!`);
+        console.log(`Your score: ${humanPlayer.score} | Computer score: ${this.score}`);
     }
 };
  
@@ -47,21 +44,23 @@ function updateComputerChoice() {
 
 function playRound() {
     updateComputerChoice();
-    if (
-        computerPlayer.gesture === game.gestures.at(humanPlayer.index - 1) ||
-        computerPlayer.gesture === game.gestures.at(humanPlayer.index - 3) 
-    ) {
+    if ((computerPlayer.index + 1) % 5 === humanPlayer.index) {
+        humanPlayer.winDescription = game.descriptions[humanPlayer.index][0];
         humanPlayer.winsRound();
         return;
-    } else if (
-        humanPlayer.gesture === game.gestures.at(computerPlayer.index - 1) ||
-        humanPlayer.gesture === game.gestures.at(computerPlayer.index - 3)
-    ) {
+    } else if ((humanPlayer.index + 2) % 5 === computerPlayer.index) {
+        humanPlayer.winDescription = game.descriptions[humanPlayer.index][1];
+        humanPlayer.winsRound();
+        return;
+    } else if ((humanPlayer.index + 1) % 5 === computerPlayer.index) {
+        computerPlayer.winDescription = game.descriptions[computerPlayer.index][0]
         computerPlayer.winsRound();
         return;
-    } else if (
-        humanPlayer.index === computerPlayer.index
-    ) {
+    } else if ((computerPlayer.index + 2) % 5 === humanPlayer.index) {
+        computerPlayer.winDescription = game.descriptions[computerPlayer.index][1]
+        computerPlayer.winsRound();
+        return;
+    } else if ( humanPlayer.index === computerPlayer.index) {
         console.log(`You picked ${humanPlayer.gesture}. Computer picked ${computerPlayer.gesture}. It's a tie!`);
         console.log(`Your score: ${humanPlayer.score} | Computer score: ${computerPlayer.score}`);
         return;
@@ -77,6 +76,8 @@ selectionButtons.forEach(button => {
     button.addEventListener("click", () => {
         humanPlayer.gesture = button.id;
         humanPlayer.index = game.gestures.indexOf(button.id);
+        console.log(`${humanPlayer.index}, ${humanPlayer.gesture}`);
         playRound();
+
    });
 });
