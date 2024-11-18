@@ -42,11 +42,6 @@ function updateComputerChoice() {
     computerPlayer.gesture = game.gestures[computerPlayer.index];
 };
 
-function gameOver() {
-    playerButtonsDiv = document.querySelector("#playerButtons");
-    playerButtonsDiv.style.display = "none";
-};
-
 function checkWin() {
     if (humanPlayer.score === game.firstTo) {
         humanPlayer.isWinner = true;
@@ -61,8 +56,41 @@ function checkWin() {
     if (game.winner) {
         gameOver();
     };
-
 };
+
+function toggleButtons() {
+    playerButtonsDiv = document.querySelector("#playerButtons");
+    playerButtonsDiv.classList.toggle("hide");
+};
+
+function gameOver() {
+    if (game.winner == humanPlayer) {
+        console.log("You win!");
+    } else if (game.winner == computerPlayer) {
+        console.log("You lose!");
+    }
+    playAgain();
+};
+
+function resetGame() {
+    humanPlayer.score = 0;
+    computerPlayer.score = 0;
+    game.winner.isWinner = false;
+    game.winner = null;
+}
+
+function playAgain() {
+    toggleButtons();
+    playAgainDiv = document.querySelector("#playAgain");
+    playAgainButton = document.createElement("button");
+    playAgainButton.textContent = "Play again?";
+    playAgainDiv.appendChild(playAgainButton);
+    playAgainButton.addEventListener("click", () => {
+        resetGame();
+        playAgainButton.classList.toggle("hide");
+        toggleButtons();
+    });
+}
 
 function playRound() {
     
