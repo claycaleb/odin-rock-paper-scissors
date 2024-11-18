@@ -8,7 +8,7 @@ const game = {
         ["Lizard poisons Spock.", "Lizard eats Paper."]
     ],
     winner: null,
-    rounds: 5
+    firstTo: 5
 };
 
 const humanPlayer = {
@@ -42,34 +42,50 @@ function updateComputerChoice() {
     computerPlayer.gesture = game.gestures[computerPlayer.index];
 };
 
+function gameOver() {
+    playerButtonsDiv = document.querySelector("#playerButtons");
+    playerButtonsDiv.style.display = "none";
+};
+
+function checkWin() {
+    if (humanPlayer.score === game.firstTo) {
+        humanPlayer.isWinner = true;
+        game.winner = humanPlayer;
+    };
+
+    if (computerPlayer.score === game.firstTo) {
+        computerPlayer.isWinner = true;
+        game.winner = computerPlayer;
+    };
+
+    if (game.winner) {
+        gameOver();
+    };
+
+};
+
 function playRound() {
     
     updateComputerChoice();
-
+    
     if ((computerPlayer.index + 1) % 5 === humanPlayer.index) {
         humanPlayer.winDescription = game.descriptions[humanPlayer.index][0];
         humanPlayer.winsRound();
-        return;
     } else if ((humanPlayer.index + 2) % 5 === computerPlayer.index) {
         humanPlayer.winDescription = game.descriptions[humanPlayer.index][1];
         humanPlayer.winsRound();
-        return;
     } else if ((humanPlayer.index + 1) % 5 === computerPlayer.index) {
         computerPlayer.winDescription = game.descriptions[computerPlayer.index][0]
         computerPlayer.winsRound();
-        return;
     } else if ((computerPlayer.index + 2) % 5 === humanPlayer.index) {
         computerPlayer.winDescription = game.descriptions[computerPlayer.index][1]
         computerPlayer.winsRound();
-        return;
-    } else if ( humanPlayer.index === computerPlayer.index) {
+    } else if (humanPlayer.index === computerPlayer.index) {
         console.log(`You picked ${humanPlayer.gesture}. Computer picked ${computerPlayer.gesture}. It's a tie!`);
-        console.log(`Your score: ${humanPlayer.score} | Computer score: ${computerPlayer.score}`);
-        return;
-    } else {
-        console.log(`You picked ${humanPlayer.gesture}. Computer picked ${computerPlayer.gesture}. No winner!`);
-        return;
+        console.log(`Your score: ${humanPlayer.score} | Computer score: ${computerPlayer.score}`)
     };
+
+    checkWin();
 };
 
 selectionButtons = document.querySelectorAll("#playerButtons > button");
