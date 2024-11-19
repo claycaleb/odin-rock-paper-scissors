@@ -95,7 +95,7 @@ function playAgain() {
 function playRound() {
     
     updateComputerChoice();
-    
+
     if ((computerPlayer.index + 1) % 5 === humanPlayer.index) {
         humanPlayer.winDescription = game.descriptions[humanPlayer.index][0];
         humanPlayer.winsRound();
