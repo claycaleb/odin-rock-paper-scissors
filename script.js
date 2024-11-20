@@ -1,5 +1,6 @@
 const game = {
     gestures: ["Rock", "Paper", "Scissors", "Spock", "Lizard"],
+    emojis: ["👊", "✋", "✌️", "🖖", "🤌"],
     descriptions: [
         ["Rock crushes Lizard.", "Rock crushes Scissors."],
         ["Paper covers Rock.", "Paper disproves Spock."],
@@ -20,7 +21,8 @@ const humanPlayer = {
     winDescription: "",
     winsRound() {
         this.score++;
-        console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. ${this.winDescription} You win the round!`);
+        const roundDescription = `${this.winDescription} You win the round!`;
+        updateDescription(roundDescription);
         updateScore(this);
     }
 };
@@ -34,7 +36,8 @@ const computerPlayer = {
     winDescription: "",
     winsRound() {
         this.score++;
-        console.log(`You picked ${humanPlayer.gesture}. Computer picked ${this.gesture}. ${this.winDescription} You lose the round!`);
+        const roundDescription = `${this.winDescription} You lose the round!`;
+        updateDescription(roundDescription);
         updateScore(this);
     }
 };
@@ -65,6 +68,25 @@ function checkWin() {
     };
 };
 
+function updateGestureContainers() {
+    const humanGestureContainer = document.querySelector("#player-gesture .emoji");
+    const computerGestureContainer = document.querySelector("#cpu-gesture .emoji");
+    humanGestureContainer.textContent = game.emojis[humanPlayer.index];
+    computerGestureContainer.textContent = game.emojis[computerPlayer.index];
+};
+
+function eraseGestureContainers() {
+    const humanGestureContainer = document.querySelector("#player-gesture .emoji");
+    const computerGestureContainer = document.querySelector("#cpu-gesture .emoji");
+    humanGestureContainer.textContent = "";
+    computerGestureContainer.textContent = "";
+};
+
+function updateDescription(string) {
+    const descriptionContainer = document.querySelector("#description");
+    descriptionContainer.textContent = string;
+}
+
 function toggleButtons() {
     const playerButtonsDiv = document.querySelector(".player-buttons");
     playerButtonsDiv.classList.toggle("hide");
@@ -72,21 +94,27 @@ function toggleButtons() {
 
 function gameOver() {
     if (game.winner == humanPlayer) {
-        console.log("You win!");
+        updateDescription("You win!");
     } else if (game.winner == computerPlayer) {
-        console.log("You lose!");
+        updateDescription("You lose!");
     }
     playAgain();
 };
 
 function resetGame() {
     humanPlayer.score = 0;
+    humanPlayer.index = null;
+    humanPlayer.gesture = "";
     computerPlayer.score = 0;
+    computerPlayer.index = null;
+    computerPlayer.gesture = "";
     updateScore(humanPlayer);
     updateScore(computerPlayer);
+    eraseGestureContainers();
+    updateDescription(" ");
     game.winner.isWinner = false;
     game.winner = null;
-}
+};
 
 function playAgain() {
     toggleButtons();
@@ -118,8 +146,7 @@ function playRound() {
         computerPlayer.winDescription = game.descriptions[computerPlayer.index][1]
         computerPlayer.winsRound();
     } else if (humanPlayer.index === computerPlayer.index) {
-        console.log(`You picked ${humanPlayer.gesture}. Computer picked ${computerPlayer.gesture}. It's a tie!`);
-        console.log(`Your score: ${humanPlayer.score} | Computer score: ${computerPlayer.score}`)
+        updateDescription("It's a tie!");
     };
 
     checkWin();
@@ -132,5 +159,6 @@ selectionButtons.forEach(button => {
         humanPlayer.gesture = button.id;
         humanPlayer.index = game.gestures.indexOf(button.id);
         playRound();
+        updateGestureContainers();
    });
 });

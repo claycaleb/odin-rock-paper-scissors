@@ -36,11 +36,13 @@ h1 {
 }
 
 .gestures {
-    width: 50%;
+    width: max-content;
     display: flex;
+    flex-shrink: 1;
     justify-content: space-evenly;
     align-items: center;
     text-align: center;
+    gap: 2vw;
     margin: 0 auto;
 }
 
@@ -49,15 +51,19 @@ h1 {
     padding: 24px 0 12px 0;
 }
 
+#description {
+    text-align: center;
+    padding: 16px 0;
+}
+
 .gestures .emoji {
     border-radius: 100%;
-    width: 100px;
-    min-height: 100px;
+    width: max(10vw, 75px);
+    min-height: max(10vw, 75px);
     border: 1px solid black;
 }
 
 .player-buttons {
-    padding: 20px 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -92,3 +98,6 @@ h1 {
     rotate: -90deg;
 }
 
+#play-again {
+    text-align: center;
+}
