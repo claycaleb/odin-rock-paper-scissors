@@ -56,30 +56,6 @@ h1 {
     border: 1px solid black;
 }
 
-@keyframes cycle {
-    0% { 
-        content: "\1F44A";
-    }
-    20% {
-        content: "\270B";
-    }
-    40% {
-        content: "\270C";
-    }
-    60% {
-        content: "\1F90C";
-        transform: rotate(-90deg);
-    }
-    100% { 
-        content: "\1F596";
-    }
-}
-
-#cpu-gesture .emoji::before {
-    content: "";
-    animation: cycle infinite 3s
-}
-
 .player-buttons {
     padding: 20px 0;
     display: flex;
