@@ -1,3 +1,113 @@
+body {
+    font-family: "Funnel Sans", sans-serif;
+}
+
+h1 {
+    margin: 0;
+    font-size: min(5.5vw, 54px);
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5% 5% 0% 5%;
+}
+
+.sb-section {
+    text-align: center;
+}
+
+.sb-section .text {
+    font-size: min(5vw, 36px);
+    font-weight: 800;
+}
+
+.score {
+    font-family: "Silkscreen", sans-serif;
+    font-size: min(7vw, 48px);
+    font-weight: 200;
+}
+
+#header {
+    width: 50%;
+    margin: 0 auto;
+    font-weight: 800;
+    text-align: center;
+}
+
+.gestures {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.gestures .text {
+    font-weight: 800;
+    padding: 24px 0 12px 0;
+}
+
+.gestures .emoji {
+    border-radius: 100%;
+    width: 100px;
+    min-height: 100px;
+    border: 1px solid black;
+}
+
+@keyframes cycle {
+    0% { 
+        content: "\1F44A";
+    }
+    20% {
+        content: "\270B";
+    }
+    40% {
+        content: "\270C";
+    }
+    60% {
+        content: "\1F90C";
+        transform: rotate(-90deg);
+    }
+    100% { 
+        content: "\1F596";
+    }
+}
+
+#cpu-gesture .emoji::before {
+    content: "";
+    animation: cycle infinite 3s
+}
+
+.player-buttons {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.choice {
+    text-align: center;
+    padding: 0 6px;
+}
+
+.choice button {
+    font-family: "Funnel Sans", sans-serif;
+    padding: calc(8px + 0.5vw);
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.choice p {
+    margin: 0;
+    padding: 8px 0;
+}
+
+.emoji {
+    font-size: calc(10px + 3vw);
+}
+
 .hide {
     display: none;
 }
@@ -5,3 +115,4 @@
 .rotate {
     rotate: -90deg;
 }
+

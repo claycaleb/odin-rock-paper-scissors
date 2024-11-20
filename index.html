@@ -5,16 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="playerButtons">
-        <button id="Rock"><div class="emoji">&#128074;</div>Rock</button>
-        <button id="Paper"><div class="emoji">&#9995;</div>Paper</button>
-        <button id="Scissors"><div class="emoji">&#9996;</div>Scissors</button>
-        <button id="Lizard"><div class="emoji rotate">&#129292;</div>Lizard</button>
-        <button id="Spock"><div class="emoji">&#128406;</div>Spock</button>
+    <div class="scoreboard">
+        <div class="sb-section">
+            <div class="text">USER</div>
+            <div class="score" id="user-score">0</div>
+        </div>
+        <div class="sb-section">
+            <div class="text">CPU</div>
+            <div class="score" id="cpu-score">0</div>
+        </div>
     </div>
-    <div id="playAgain"></div>
-<script src="script.js" defer></script>
+    <div id="header">
+        <h1>ROCK PAPER SCISSORS LIZARD SPOCK</h1>
+    </div>
+    <div class="gestures">
+        <div id="player-gesture">
+            <div class="text">USER</div>
+            <div class="emoji"></div>
+        </div>
+        <div>VS</div>
+        <div id="cpu-gesture">
+            <div class="text">CPU</div>
+            <div class="emoji"></div>
+        </div>
+    </div>
+    <div id="win-description"></div>
+    <div class="player-buttons">
+        <div class="choice">
+            <button id="Rock"><div class="emoji">&#128074;</div></button>
+            <p>Rock</p>
+        </div>
+        <div class="choice">
+            <button id="Paper"><div class="emoji">&#9995;</div></button>
+            <p>Paper</p>
+        </div>
+        <div class="choice">
+            <button id="Scissors"><div class="emoji">&#9996;</div></button>
+            <p>Scissors</p>
+        </div>
+        <div class="choice">
+            <button id="Lizard"><div class="emoji rotate">&#129292;</div></button>
+            <p>Lizard</p>
+        </div>
+        <div class="choice">
+            <button id="Spock"><div class="emoji">&#128406;</div></button>
+            <p>Spock</p>
+        </div>
+    </div>
+    <div id="play-again"></div>
+    <section id="info">
+
+    </section>
+<script src="script.js"></script>
 </body>
 </html>

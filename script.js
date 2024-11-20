@@ -16,11 +16,12 @@ const humanPlayer = {
     gesture: "",
     isWinner: false,
     score: 0,
+    scoreText: document.querySelector("#user-score"),
     winDescription: "",
     winsRound() {
         this.score++;
         console.log(`You picked ${this.gesture}. Computer picked ${computerPlayer.gesture}. ${this.winDescription} You win the round!`);
-        console.log(`Your score: ${this.score} | Computer score: ${computerPlayer.score}`);
+        updateScore(this);
     }
 };
 
@@ -29,12 +30,18 @@ const computerPlayer = {
     gesture: "",
     isWinner: false,
     score: 0,
+    scoreText: document.querySelector("#cpu-score"),
     winDescription: "",
     winsRound() {
         this.score++;
         console.log(`You picked ${humanPlayer.gesture}. Computer picked ${this.gesture}. ${this.winDescription} You lose the round!`);
-        console.log(`Your score: ${humanPlayer.score} | Computer score: ${this.score}`);
+        updateScore(this);
     }
+};
+
+function updateScore(player) {
+    const { score, scoreText } = player;
+    scoreText.textContent = score.toString();
 };
  
 function updateComputerChoice() {
@@ -59,7 +66,7 @@ function checkWin() {
 };
 
 function toggleButtons() {
-    playerButtonsDiv = document.querySelector("#playerButtons");
+    const playerButtonsDiv = document.querySelector(".player-buttons");
     playerButtonsDiv.classList.toggle("hide");
 };
 
@@ -75,14 +82,16 @@ function gameOver() {
 function resetGame() {
     humanPlayer.score = 0;
     computerPlayer.score = 0;
+    updateScore(humanPlayer);
+    updateScore(computerPlayer);
     game.winner.isWinner = false;
     game.winner = null;
 }
 
 function playAgain() {
     toggleButtons();
-    playAgainDiv = document.querySelector("#playAgain");
-    playAgainButton = document.createElement("button");
+    const playAgainDiv = document.querySelector("#play-again");
+    const playAgainButton = document.createElement("button");
     playAgainButton.textContent = "Play again?";
     playAgainDiv.appendChild(playAgainButton);
     playAgainButton.addEventListener("click", () => {
@@ -116,7 +125,7 @@ function playRound() {
     checkWin();
 };
 
-selectionButtons = document.querySelectorAll("#playerButtons > button");
+const selectionButtons = document.querySelectorAll(".choice > button");
 
 selectionButtons.forEach(button => {
     button.addEventListener("click", () => {
