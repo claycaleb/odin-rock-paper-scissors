@@ -69,22 +69,41 @@ function checkWin() {
 };
 
 function updateGestureContainers() {
-    const humanGestureContainer = document.querySelector("#player-gesture .emoji");
-    const computerGestureContainer = document.querySelector("#cpu-gesture .emoji");
-    humanGestureContainer.textContent = game.emojis[humanPlayer.index];
-    computerGestureContainer.textContent = game.emojis[computerPlayer.index];
+    const humanGestureSpan = document.querySelector("#player-gesture .emoji span");
+    const computerGestureSpan = document.querySelector("#cpu-gesture .emoji span");
+    
+    humanGestureSpan.textContent = game.emojis[humanPlayer.index];
+    
+    if (humanPlayer.index == 4) {
+        humanGestureSpan.classList.add("rotate");
+    } else {
+        humanGestureSpan.classList.remove("rotate");
+    }
+   
+    computerGestureSpan.textContent = game.emojis[computerPlayer.index];
+    
+    if (computerPlayer.index == 4) {
+        computerGestureSpan.classList.add("rotate");
+    } else {
+        computerGestureSpan.classList.remove("rotate");
+    };
 };
 
 function eraseGestureContainers() {
-    const humanGestureContainer = document.querySelector("#player-gesture .emoji");
-    const computerGestureContainer = document.querySelector("#cpu-gesture .emoji");
-    humanGestureContainer.textContent = "";
-    computerGestureContainer.textContent = "";
+    const humanGestureSpan = document.querySelector("#player-gesture .emoji span");
+    const computerGestureSpan = document.querySelector("#cpu-gesture .emoji span");
+    humanGestureSpan.textContent = "";
+    computerGestureSpan.textContent = "";
 };
 
 function updateDescription(string) {
     const descriptionContainer = document.querySelector("#description");
     descriptionContainer.textContent = string;
+}
+
+function updateResult(string) {
+    const resultContainer = document.querySelector("#result");
+    resultContainer.textContent = string;
 }
 
 function toggleButtons() {
@@ -94,9 +113,9 @@ function toggleButtons() {
 
 function gameOver() {
     if (game.winner == humanPlayer) {
-        updateDescription("You win!");
+        updateResult("You win!");
     } else if (game.winner == computerPlayer) {
-        updateDescription("You lose!");
+        updateResult("You lose!");
     }
     playAgain();
 };
@@ -112,6 +131,7 @@ function resetGame() {
     updateScore(computerPlayer);
     eraseGestureContainers();
     updateDescription(" ");
+    updateResult(" ");
     game.winner.isWinner = false;
     game.winner = null;
 };
@@ -120,7 +140,7 @@ function playAgain() {
     toggleButtons();
     const playAgainDiv = document.querySelector("#play-again");
     const playAgainButton = document.createElement("button");
-    playAgainButton.textContent = "Play again?";
+    playAgainButton.textContent = "REMATCH";
     playAgainDiv.appendChild(playAgainButton);
     playAgainButton.addEventListener("click", () => {
         resetGame();

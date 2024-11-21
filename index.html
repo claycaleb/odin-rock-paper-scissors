@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors</title>
+    <title>Rock, Paper, Scissors, Lizard, Spock</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,15 +26,16 @@
     <div class="gestures">
         <div id="player-gesture">
             <div class="text">USER</div>
-            <div class="emoji"></div>
+            <div class="emoji"><span></span></div>
         </div>
-        <div>VS</div>
+        <div id="vs"><span>VS</span></div>
         <div id="cpu-gesture">
             <div class="text">CPU</div>
-            <div class="emoji"></div>
+            <div class="emoji"><span></span></div>
         </div>
     </div>
     <div id="description"> </div>
+    <div id="result"> </div>
     <div class="player-buttons">
         <div class="choice">
             <button id="Rock"><div class="emoji">&#128074;</div></button>
