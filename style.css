@@ -101,6 +101,7 @@ h1 {
     flex-grow: 1;
     align-items: center;
     justify-content: center;
+    max-width: 100%;
 }
 
 .choice button {
@@ -108,8 +109,10 @@ h1 {
     flex-shrink: 0;
     padding: min(12px, 3vw);
     border: 1px solid black;
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: #fff;
+    width: min(80px, 15vw);
+    height: min(80px, 15vw);
 }
 
 .choice p {
