@@ -103,6 +103,7 @@ h1 {
 
 .choice button {
     font-family: "Funnel Sans", sans-serif;
+    flex-shrink: 0;
     padding: calc(8px + 0.5vw);
     border: 1px solid black;
     border-radius: 100%;
